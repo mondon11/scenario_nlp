@@ -173,11 +173,11 @@ def main():
         }
     }
     '''
-    # eg. input: ["account_detail",{"person":["ss"],"timespan":[],"money":[]},"00000000"]
+    # eg. input:{"act":"account_detail","slot":{"person":["ss"],"timespan":[],"money":[]},"sessionId":"00000000"}
     while(1):
         query = input('请输入问题：')
         ls = json.loads(query)
-        scenario = Scenario(ls[0],ls[1],ls[2],l)
+        scenario = Scenario(ls['act'],ls['slot'],ls['sessionId'],l)
         #scenario = Scenario('account_detail',{'person':['ss'],'timespan':[],'money':[]},'00000000',l)
         scenario.chatflow()
         print(l)
