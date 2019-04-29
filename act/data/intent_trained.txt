@@ -1,0 +1,97 @@
+查 流水 __label__liushui
+查询 流水 __label__liushui
+查询 下 流水 信息 __label__liushui
+我要 查下 流水 __label__liushui
+帮 看 下 流水 __label__liushui
+查询 一下 流水 信息 __label__liushui
+帮 查询 下 流水 信息 __label__liushui
+上个 上个月 流水 信息 啥样 __label__liushui
+看看 上个 上个月 流水 __label__liushui
+查询 上个 上个月 流水 __label__liushui
+今年 三月 月份 三月份 流水 信息 __label__liushui
+查下 大 上个 上个月 流水 __label__liushui
+查询 去年 流水 信息 __label__liushui
+帮 看看 今年 7 月 流水 __label__liushui
+要查 去年 9 月份 流水 信息 __label__liushui
+查 一下 10 月 流水 情况 __label__liushui
+流水 信息 给 看看 __label__liushui
+查 1 月份 流水 __label__liushui
+咨询 下 流水 信息 __label__liushui
+查 2018 年 6 月 流水 __label__liushui
+查询 下 2019 年 12 月 流水 记录 __label__liushui
+帮 看看 2017 年 九月 月份 九月份 流水 吧 __label__liushui
+2016 年 全年 流水 查询 __label__liushui
+我要 看看 2015 年 流水 __label__liushui
+会 查询 流水 吗 __label__liushui
+帮 查下 流水 记录 吧 __label__liushui
+转账 __label__zhuanzhang
+转钱 __label__zhuanzhang
+帮 转个 钱 吧 __label__zhuanzhang
+想要 转钱 __label__zhuanzhang
+转 一笔 钱 给 大 刘 __label__zhuanzhang
+转钱 给 小侯 吧 __label__zhuanzhang
+给 老 赵转 钱 200 元 __label__zhuanzhang
+帮 转 一笔 钱 给 娜 姐 __label__zhuanzhang
+帮 转账 __label__zhuanzhang
+给 转账 __label__zhuanzhang
+给 小王 转账 __label__zhuanzhang
+想 转账 给 小张 __label__zhuanzhang
+转 一笔 账 __label__zhuanzhang
+转给 赵四 100 元 __label__zhuanzhang
+给 孙 总 转账 一百 百元 一百元 __label__zhuanzhang
+我要 给 李丽转 500 块 __label__zhuanzhang
+帮 给 周 同学 转账 __label__zhuanzhang
+给 吴立 转账 一万 __label__zhuanzhang
+转个 账 给 郑 女士 __label__zhuanzhang
+给 老王 转账 900 吧 __label__zhuanzhang
+转 3000 给 小侯 __label__zhuanzhang
+能 帮 转个 账 吗 __label__zhuanzhang
+给 林 总 转账 800 __label__zhuanzhang
+我要 给 老师 转钱 __label__zhuanzhang
+转钱 给 妈妈 __label__zhuanzhang
+给 爸 转个 五万 万块 五万块 吧 __label__zhuanzhang
+转 一笔 钱 给 冯哥 __label__zhuanzhang
+转账 给 杨叔 二百 __label__zhuanzhang
+会 转账 吗 __label__zhuanzhang
+能 帮 转账 吗 __label__zhuanzhang
+帮 转个 账 吧 __label__zhuanzhang
+请 年 假 __label__nianjia
+想 请 个 年 假 __label__nianjia
+帮 请 个 年 假 吧 __label__nianjia
+办理 年 假 __label__nianjia
+申请 年 假 __label__nianjia
+我要 办年 假 申请 __label__nianjia
+想 请 4.5 到 4.8 年 假 __label__nianjia
+申请 5 月 20 号 到 5 月 23 号 年 假 __label__nianjia
+办理 一月 十日 到 十五 五日 十五日 年 假 __label__nianjia
+帮 请 个 11 月 7 号 到 9 号 年 假 吧 __label__nianjia
+请个 年 假 ， 明天 到 后天 大后天 __label__nianjia
+申请 这个 月 20 号 到 23 号 年 假 __label__nianjia
+年 假 可以 申请 吗 __label__nianjia
+下个月 12 号 到 18 号 年 假 要 申请 __label__nianjia
+办 一下 年 假 __label__nianjia
+办 7 月 十六 到 20 号 年 假 __label__nianjia
+申 九月 一号 开始 到 六号 结束 年 假 __label__nianjia
+办理 年 假 ， 10 月 8 号 到 10 月 11 号 __label__nianjia
+请 帮 办理 下 12 月 22 号 到 25 号 年 假 申请 __label__nianjia
+申请 一下 年 假 可以 不 __label__nianjia
+是 男 是 女 __label__other
+生日 是 哪天 __label__other
+妈妈 是 谁 __label__other
+爸爸 是 谁 __label__other
+在 哪里 __label__other
+会 做 什么 __label__other
+你长 什么 样子 __label__other
+有 什么 爱好 __label__other
+有 朋友 吗 __label__other
+睡觉 吗 __label__other
+不是 是不是 机器 机器人 __label__other
+喜欢 吃 什么 __label__other
+几岁 了 __label__other
+你好 聪明 __label__other
+觉得 长得帅 吗 __label__other
+可以 给 改个 名字 吗 __label__other
+在 吗 __label__other
+你好 __label__other
+来自 哪里 __label__other
+喜欢 做 什么 __label__other

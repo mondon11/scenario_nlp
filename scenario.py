@@ -71,93 +71,163 @@ class Scenario:
         return flag,res
 
     def chatflow(self):
+        res = {}
         #1.意图命中场景
         if self.act in self.act2slot:
-            print('1')
+            #print('1')
             #1.1 lru有该sessionId对应的cache
             if self.sessionId in self.lru_dict.keys():
-                print('1.1')
+                #print('1.1')
                 #1.1.1 新老act一致
                 if self.act == self.lru_dict[self.sessionId]['act']:
-                    print('1.1.1')
+                    #print('1.1.1')
                     slot_fusion = self.dict_fusion(self.lru_dict[self.sessionId]['slot'],self.ner)
                     completed,missed = self.value_completed(slot_fusion,self.act2slot[self.act])
                     #1.1.1.1 新老NER融合后必填slot可补全
                     if completed:
-                        print('1.1.1.1')
-                        print(self.act,slot_fusion)
+                        #print('1.1.1.1')
+                        #print(self.act,slot_fusion)
+                        #print('=================================================================')
+                        res = {
+                            'act':self.act,
+                            'slot':slot_fusion,
+                            'code':'0',
+                            'msg':'识别成功！'
+                        }
                         del self.lru_dict[self.sessionId]
+                        return res
                     #1.1.1.2 新老NER融合后必填slot不能补全
                     else:
-                        print('1.1.1.2')
+                        #print('1.1.1.2')
                         del self.lru_dict[self.sessionId]
                         self.lru_dict[self.sessionId] = {
                             'act':self.act,
                             'slot':slot_fusion
                         }
-                        print('请补全如下信息：' + str(missed))
+                        #print('请补全如下信息：' + str(missed))
+                        res = {
+                            'act': self.act,
+                            'slot': slot_fusion,
+                            'code':'1',
+                            'msg':'请补全如下信息：' + str(missed)
+                        }
+                        return res
                 #1.1.2 新老act不一致
                 else:
-                    print('1.1.2')
+                    #print('1.1.2')
                     completed,missed = self.value_completed(self.ner,self.act2slot[self.act])
                     #1.1.2.1 新NER能补全必填slot
                     if completed:
-                        print('1.1.2.1')
-                        print(self.act,self.ner)
+                        #print('1.1.2.1')
+                        #print(self.act,self.ner)
+                        #print('=================================================================')
+                        res = {
+                            'act':self.act,
+                            'slot':self.ner,
+                            'code':'0',
+                            'msg':'识别成功！'
+                        }
                         del self.lru_dict[self.sessionId]
+                        return res
                     #1.1.2.2 新NER不能补全必填slot
                     else:
-                        print('1.1.2.2')
+                        #print('1.1.2.2')
                         del self.lru_dict[self.sessionId]
                         self.lru_dict[self.sessionId] = {
                             'act':self.act,
                             'slot':self.ner
                         }
-                        print(self.lru_dict)
-                        print('请补全如下信息：' + str(missed))
+                        #print(self.lru_dict)
+                        #print('请补全如下信息：' + str(missed))
+                        res = {
+                            'act': self.act,
+                            'slot': self.ner,
+                            'code': '1',
+                            'msg': '请补全如下信息：' + str(missed)
+                        }
+                        return res
             #1.2 lru没有该sessionId对应的cache
             else:
-                print('1.2')
+                #print('1.2')
                 completed,missed = self.value_completed(self.ner,self.act2slot[self.act])
                 #1.2.1 NER能补全必填slot
                 if completed:
-                    print('1.2.1')
-                    print(self.act,self.ner)
+                    #print('1.2.1')
+                    #print(self.act,self.ner)
+                    #print('=================================================================')
+                    res = {
+                        'act': self.act,
+                        'slot': self.ner,
+                        'code': '0',
+                        'msg': '识别成功！'
+                    }
+                    return res
                 #1.2.2 NER不能补全必填slot
                 else:
-                    print('1.2.2')
+                    #print('1.2.2')
                     self.lru_dict[self.sessionId] = {
                         'act':self.act,
                         'slot':self.ner
                     }
-                    print('请补全如下信息：'+str(missed))
+                    #print('请补全如下信息：'+str(missed))
+                    res = {
+                        'act': self.act,
+                        'slot': self.ner,
+                        'code': '1',
+                        'msg': '请补全如下信息：' + str(missed)
+                    }
+                    return res
 
 
         #2.意图没命中场景
         else:
-            print('2')
+            #print('2')
             #2.1 lru有该sessionId对应的cache
             if self.sessionId in self.lru_dict.keys():
-                print('2.1')
+                #print('2.1')
                 act_old = self.lru_dict[self.sessionId]['act']
                 slot_old = self.lru_dict[self.sessionId]['slot']
                 slot_fusion = self.dict_fusion(slot_old,self.ner)
                 completed,missed = self.value_completed(slot_fusion,self.act2slot[act_old])
                 #2.1.1 NER能补全cache
                 if completed:
-                    print('2.1.1')
+                    #print('2.1.1')
                     del self.lru_dict[self.sessionId]
-                    print(act_old,slot_fusion)
+                    #print(act_old,slot_fusion)
+                    #print('=================================================================')
+                    res = {
+                        'act': act_old,
+                        'slot': slot_fusion,
+                        'code': '0',
+                        'msg': '识别成功！'
+                    }
+                    return res
                 #2.1.2 NER不能补全cache
                 else:
-                    print('2.1.2')
+                    #print('2.1.2')
                     del self.lru_dict[self.sessionId]
-                    print('我会查流水和转账，你可以问问我哦！')
+                    #print('我会查流水和转账，你可以问问我哦！')
+                    #print('=================================================================')
+                    res = {
+                        'act':self.act,
+                        'slot':self.ner,
+                        'code': '2',
+                        'msg': '我会查流水和转账，你可以问问我哦！'
+                    }
+                    return res
 
             #2.2 lru没有该sessionId对应的cache
             else:
-                print('2.2')
-                print('我会查流水和转账，你可以问问我哦！')
+                #print('2.2')
+                #print('我会查流水和转账，你可以问问我哦！')
+                #print('=================================================================')
+                res = {
+                    'act': self.act,
+                    'slot': self.ner,
+                    'code': '2',
+                    'msg': '我会查流水和转账，你可以问问我哦！'
+                }
+                return res
 
 
 
