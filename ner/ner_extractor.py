@@ -6,6 +6,7 @@
 
 from ner.time.TimeNormalizer import *
 import jieba.posseg as pseg
+from pyhanlp import *
 
 class extractor():
     def __init__(self):
@@ -22,11 +23,19 @@ class extractor():
 
     def name_extract(self,text):
         res = []
-        segs = pseg.cut(text)
+        '''
+        segs = pseg.cut(text)  
         for word,flag in segs:
             if flag == 'nr':
                 res.append(word)
         return res
+        '''
+
+        for item in HanLP.segment(text):
+            if str(item.nature) == 'nr':
+                res.append(str(item.word))
+        return res
+
 
     def money_extract(self,text):
         res = []

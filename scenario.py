@@ -17,6 +17,7 @@ class Scenario:
         self.ner = ner
         self.lru_dict = lru_dict
         self.sessionId = sessionId
+        self.count = 1
 
     def dict_fusion(self,dict1,dict2):
         '''
@@ -88,9 +89,13 @@ class Scenario:
                         #print('1.1.1.1')
                         #print(self.act,slot_fusion)
                         #print('=================================================================')
+
+                        self.count = self.lru_dict[self.sessionId]['round'] + 1
+
                         res = {
                             'act':self.act,
                             'slot':slot_fusion,
+                            'round':self.count,
                             'code':'0',
                             'msg':'识别成功！'
                         }
@@ -99,15 +104,21 @@ class Scenario:
                     #1.1.1.2 新老NER融合后必填slot不能补全
                     else:
                         #print('1.1.1.2')
+
+                        self.count = self.lru_dict[self.sessionId]['round']+1
+
                         del self.lru_dict[self.sessionId]
+
                         self.lru_dict[self.sessionId] = {
                             'act':self.act,
-                            'slot':slot_fusion
+                            'slot':slot_fusion,
+                            'round':self.count
                         }
                         #print('请补全如下信息：' + str(missed))
                         res = {
                             'act': self.act,
                             'slot': slot_fusion,
+                            'round':self.count,
                             'code':'1',
                             'msg':'请补全如下信息：' + str(missed)
                         }
@@ -124,6 +135,7 @@ class Scenario:
                         res = {
                             'act':self.act,
                             'slot':self.ner,
+                            'round':self.count,
                             'code':'0',
                             'msg':'识别成功！'
                         }
@@ -135,13 +147,15 @@ class Scenario:
                         del self.lru_dict[self.sessionId]
                         self.lru_dict[self.sessionId] = {
                             'act':self.act,
-                            'slot':self.ner
+                            'slot':self.ner,
+                            'round':self.count
                         }
                         #print(self.lru_dict)
                         #print('请补全如下信息：' + str(missed))
                         res = {
                             'act': self.act,
                             'slot': self.ner,
+                            'round':self.count,
                             'code': '1',
                             'msg': '请补全如下信息：' + str(missed)
                         }
@@ -158,6 +172,7 @@ class Scenario:
                     res = {
                         'act': self.act,
                         'slot': self.ner,
+                        'round':self.count,
                         'code': '0',
                         'msg': '识别成功！'
                     }
@@ -167,12 +182,14 @@ class Scenario:
                     #print('1.2.2')
                     self.lru_dict[self.sessionId] = {
                         'act':self.act,
-                        'slot':self.ner
+                        'slot':self.ner,
+                        'round':self.count
                     }
                     #print('请补全如下信息：'+str(missed))
                     res = {
                         'act': self.act,
                         'slot': self.ner,
+                        'round':self.count,
                         'code': '1',
                         'msg': '请补全如下信息：' + str(missed)
                     }
@@ -192,18 +209,22 @@ class Scenario:
                 #2.1.1 NER能补全cache
                 if completed:
                     #print('2.1.1')
+                    self.count = self.lru_dict[self.sessionId]['round'] + 1
                     del self.lru_dict[self.sessionId]
                     #print(act_old,slot_fusion)
                     #print('=================================================================')
                     res = {
                         'act': act_old,
                         'slot': slot_fusion,
+                        'round':self.count,
                         'code': '0',
                         'msg': '识别成功！'
                     }
                     return res
                 #2.1.2 NER不能补全cache
                 else:
+                    '''
+                    
                     #print('2.1.2')
                     del self.lru_dict[self.sessionId]
                     #print('我会查流水和转账，你可以问问我哦！')
@@ -215,6 +236,34 @@ class Scenario:
                         'msg': '我会查流水和转账，你可以问问我哦！'
                     }
                     return res
+                    '''
+                    if self.lru_dict[self.sessionId]['round'] < 3:
+                        self.count = self.lru_dict[self.sessionId]['round'] + 1
+                        del self.lru_dict[self.sessionId]
+                        self.lru_dict[self.sessionId] = {
+                            'act': act_old,
+                            'slot': slot_fusion,
+                            'round':self.count
+                        }
+                        res = {
+                            'act': act_old,
+                            'slot': slot_fusion,
+                            'round':self.count,
+                            'code': '1',
+                            'msg': '请补全如下信息：' + str(missed)
+                        }
+                        return res
+                    else:
+                        self.count = self.lru_dict[self.sessionId]['round'] + 1
+                        del self.lru_dict[self.sessionId]
+                        res = {
+                            'act': self.act,
+                            'slot': self.ner,
+                            'round':self.count,
+                            'code': '2',
+                            'msg': '我会查流水和转账，你可以问问我哦！'
+                        }
+                        return res
 
             #2.2 lru没有该sessionId对应的cache
             else:
@@ -224,6 +273,7 @@ class Scenario:
                 res = {
                     'act': self.act,
                     'slot': self.ner,
+                    'round':self.count,
                     'code': '2',
                     'msg': '我会查流水和转账，你可以问问我哦！'
                 }
