@@ -30,10 +30,12 @@ class Service():
         time = ner_ex.time_extract(text)
         name = ner_ex.name_extract(text)
         money = ner_ex.money_extract(text)
+        number = ner_ex.number_extract(text)
         res = {
             'time':time,
             'name':name,
-            'money':money
+            'money':money,
+            'number':number
         }
         return res
 
@@ -48,10 +50,12 @@ def main():
         timespan = json.loads(ner['time'])['timespan']
         person = ner['name']
         money = ner['money']
+        number = ner['number']
         slot = {
             'timespan':timespan,
             'person':person,
-            'money':money
+            'money':money,
+            'number':number
         }
 
         scenario = Scenario(act,slot,'00000000',l)
