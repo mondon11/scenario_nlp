@@ -14,11 +14,12 @@ class extractor():
     def time_extract(self,text):
         if text == '':
             res = {"error": "text is null", "timestamp": "", "timespan": [], "timedelta": ""}
-            return res
+            #return res
         else:
             tn = TimeNormalizer()
             res = tn.parse(target = text)
-            return res
+            #return res
+        self._time = res
 
     def name_extract(self,text):
         res = []
@@ -26,7 +27,8 @@ class extractor():
         for word,flag in segs:
             if flag == 'nr':
                 res.append(word)
-        return res
+        #return res
+        self._name = res
 
     def money_extract(self,text):
         res = []
@@ -34,7 +36,20 @@ class extractor():
         for word, flag in segs:
             if flag == 'm':
                 res.append(word)
-        return res
+        #return res
+        self._money = res
+
+    @property
+    def time(self):
+        return self._time
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def money(self):
+        return self._money
 
 
 def main():

@@ -9,6 +9,7 @@ from ner.ner_extractor import *
 from scenario import *
 import json
 from lru import LRU
+from threading import Thread
 
 class Service():
     def __init__(self):
@@ -27,13 +28,25 @@ class Service():
 
     def ner_extract(self,text):
         ner_ex = extractor()
-        time = ner_ex.time_extract(text)
-        name = ner_ex.name_extract(text)
-        money = ner_ex.money_extract(text)
+        t1 = Thread(target=ner_ex.time_extract,args=(text,))
+        t1.start()
+        t2 = Thread(target=ner_ex.name_extract,args=(text,))
+        t2.start()
+        t3 = Thread(target=ner_ex.money_extract,args=(text,))
+        t3.start()
+        t1.join()
+        t2.join()
+        t3.join()
+        #time = ner_ex.time_extract(text)
+        #name = ner_ex.name_extract(text)
+        #money = ner_ex.money_extract(text)
         res = {
-            'time':time,
-            'name':name,
-            'money':money
+            #'time':time,
+            #'name':name,
+            #'money':money
+            'time': ner_ex.time,
+            'name':ner_ex.name,
+            'money':ner_ex.money
         }
         return res
 
