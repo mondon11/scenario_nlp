@@ -28,15 +28,19 @@ class Service():
 
     def ner_extract(self,text):
         ner_ex = extractor()
+
         t1 = Thread(target=ner_ex.time_extract,args=(text,))
         t1.start()
         t2 = Thread(target=ner_ex.name_extract,args=(text,))
         t2.start()
         t3 = Thread(target=ner_ex.money_extract,args=(text,))
         t3.start()
+        t4 = Thread(target=ner_ex.number_extract, args=(text,))
+        t4.start()
         t1.join()
         t2.join()
         t3.join()
+        t4.join()
         #time = ner_ex.time_extract(text)
         #name = ner_ex.name_extract(text)
         #money = ner_ex.money_extract(text)
@@ -46,7 +50,8 @@ class Service():
             #'money':money
             'time': ner_ex.time,
             'name':ner_ex.name,
-            'money':ner_ex.money
+            'money':ner_ex.money,
+            'number':ner_ex.number
         }
         return res
 
@@ -61,10 +66,12 @@ def main():
         timespan = json.loads(ner['time'])['timespan']
         person = ner['name']
         money = ner['money']
+        number = ner['number']
         slot = {
             'timespan':timespan,
             'person':person,
-            'money':money
+            'money':money,
+            'number':number
         }
 
         scenario = Scenario(act,slot,'00000000',l)
